@@ -1,0 +1,99 @@
+@charset "ISO-8859-1";
+ body {
+        margin: 0;
+        /*padding: 20px;*/
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f5f5f5;
+    }
+
+    .orders-container {
+        max-width: 800px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .order-card {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .order-date {
+        font-size: 14px;
+        color: #666;
+    }
+
+    .order-details {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .order-details img {
+        width: 90px;
+        height: 90px;
+        object-fit: contain;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        background-color: #fafafa;
+    }
+
+    .product-info p {
+        margin: 4px 0;
+        font-size: 15px;
+    }
+
+    .order-status {
+        align-self: flex-end;
+        background-color: #f4e90b;
+        color: white;
+        font-size: 14px;
+        padding: 6px 12px;
+        border-radius: 20px;
+        width: fit-content;
+    }
+    
+    .order-status a{
+    	text-decoration: none;
+    	background-color: #f4e90b;
+        color: white;
+        font-size: 14px;
+        padding: 6px 12px;
+        border-radius: 20px;
+        width: fit-content;
+        cursor: pointer;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #333;
+    }
+    
+     /* Header Bar */
+    .header {
+        background-color: #f4e90b;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+    }
+
+    .header a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        margin: 0 15px;
+    }
+
+    .header a:hover {
+        text-decoration: underline;
+    }
