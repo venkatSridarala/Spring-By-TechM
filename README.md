@@ -1,45 +1,22 @@
-# Spring-By-TechM
-DROP DATABASE supplementsdb;
-CREATE DATABASE supplementdb;
-use supplementdb;
-CREATE TABLE users (
-    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(100) NOT NULL,
-    role VARCHAR(50) NOT NULL DEFAULT 'USER'
-);
-CREATE TABLE products (
-    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    description TEXT,
-    price DECIMAL(10,2) NOT NULL
-);
-CREATE TABLE cart_item (
-    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    quantity INT NOT NULL,
-    product_id BIGINT UNSIGNED,
-    user_id BIGINT UNSIGNED,
-    FOREIGN KEY (product_id) REFERENCES products(id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
-);
-INSERT INTO users (name, email, password, role)
-VALUES ('Venkat', 'venkat@example.com', 'pass123', 'CUSTOMER');
+insert into item_url(url,item_id) values('data:image/jpeg;base64,/m.media-amazon.com/images/I/51Cyfc1u8lL._SL500_.jpg',1);
+insert into item_url(url,item_id) values('https://m.media-amazon.com/images/I/7167U0RBeKL._AC_SL1500_.jpg',2);
+insert into item_url(url,item_id) values('https://shoutnerd.com/wp-content/uploads/2025/01/LEGO-Classic-Bricks-and-Animals-Set.jpg',3);
+insert into item_url(url,item_id) values('https://images-na.ssl-images-amazon.com/images/I/81x4ZbLCYqL._AC_SL1500_.jpg',4);
+insert into item_url(url,item_id) values('http://media.mattel.com/root/Images/MainImage/chx36_hot_wheels_track_builder_-_spiral_stack-up_starter_set_xxx_9.jpg',5);
+insert into item_url(url,item_id) values('https://cdn.pixelbin.io/v2/black-bread-289bfa/HrdP6X/original/hamleys-product/493664261/665/493664261-3_7733.webp',6);
+insert into item_url(url,item_id) values('https://m.media-amazon.com/images/I/51hTrbq48aL._SL500_.jpg',7);
+insert into item_url(url,item_id) values('https://i5.walmartimages.ca/images/Large/869/777/6000196869777.jpg',8);
+insert into item_url(url,item_id) values('https://tse1.mm.bing.net/th/id/OIP.i881ee_mxdYGDllaQhLHegHaH7?pid=Api&P=0&h=180',9);
+insert into item_url(url,item_id) values('https://i.pinimg.com/736x/1b/f6/b4/1bf6b4ff2da7e20a440f99948b9f3135.jpg',10);
+insert into item_url(url,item_id) values('https://morismos.com/cdn/shop/files/Tezituor-5ft-Teddy-Bear-Stuffed-Animal-Big-Bear-with-I-Love-You-Heart-Plush-Toy_b4fef48b-7bb7-409b-81dd-a8569ce2b145.4581a5ee8b7269e3df80b469f4458577.jpg?v=1728977525',11);
+insert into item_url(url,item_id) values('https://m.media-amazon.com/images/I/71vMSRcdJ2L._AC_SL1500_.jpg',12);
+insert into item_url(url,item_id) values('https://i5.walmartimages.com/asr/9b47d4bf-97af-43ee-94c8-b4f2142b57d8_1.07f0d2c463ce286273318123a7eed850.jpeg',13);
+insert into item_url(url,item_id) values('https://i5.walmartimages.com/seo/JunYeShi-Clearance-Under-15-00-Foldable-1080P-FPV-Drone-Gesture-Control-Quadcopter-with-Obstacle-Avoidance-for-Beginners_9e78cc9f-79a6-43df-a48b-29deb86a4ad7.6cae5d6514a097bb93667aed8ca801cd.jpeg',14);
+insert into item_url(url,item_id) values('https://m.media-amazon.com/images/I/71BkbXMro8L._AC_SL1500_.jpg',15);
+insert into item_url(url,item_id) values('https://m.media-amazon.com/images/I/51engwnf0QL._SL500_.jpg',16);
+insert into item_url(url,item_id) values('https://www.picclickimg.com/DfMAAOSwrc9nPIl6/UNO-Playing-Card-Game-Family-Children-Friends-Party.webp',17);
+insert into item_url(url,item_id) values('https://tse3.mm.bing.net/th/id/OIP.ci1cC7Uyi7yryLixwZRUHQHaFU?pid=Api&P=0&h=180',18);
+insert into item_url(url,item_id) values('https://i5.walmartimages.com/asr/4f143e71-ee50-4bb3-af62-ccec79ee2bf9.2d158e7ad7f4a6b2a7f884ad922763f9.jpeg',20);
 
-INSERT INTO products (name, description, price)
-VALUES ('Whey Protein', 'Premium whey protein for muscle growth', 1499.99);
-
-INSERT INTO cart_item (quantity, product_id, user_id)
-VALUES (2, 1, 1);
-
-INSERT INTO products (name, description, price, category, image_url)
-VALUES 
-('Whey Protein', 'High-quality protein for muscle recovery', 2999.00, 'Protein', 'https://m.media-amazon.com/images/I/61f7VVy4+HL._SX679_.jpg'),
-('Creatine Monohydrate', 'Boost performance and muscle gains', 1499.00, 'Creatine', 'https://m.media-amazon.com/images/I/61X4HDEomzL._SX679_.jpg'),
-('Multivitamins', 'Essential vitamins for daily health', 799.00, 'Vitamins', 'https://m.media-amazon.com/images/I/71V8U2bq5rL._SX679_.jpg');
-
-INSERT INTO products (name, description, price, image_url)
-VALUES ('Whey Protein', 'High-quality whey supplement', 1999.00, 'whey.jpg');
-
-INSERT INTO products (name, description, price, image_url)
-VALUES ('Whey Protein', 'High-quality whey supplement', 1999.00, 'https://m.media-amazon.com/images/I/71-SdWZQ4xL._SL1500_.jpg');
+select * from item_url;
+update item_url set url='https://m.media-amazon.com/images/I/51Cyfc1u8lL._SL500_.jpg' where item_id=1;
