@@ -1,0 +1,124 @@
+create database toysdb;
+use toysdb;
+INSERT INTO item_details (item_id, avail_quantity, description, is_avail, item_name, price, weight, category) VALUES
+(1, 15, 'Remote Control Sports Car - 1:18 Scale, Rechargeable', true, 'Remote Car', 1200.00, 0.8, 'toys'),
+(2, 10, 'Mini Drone with Camera and Altitude Hold', true, 'Drone', 3500.00, 0.5, 'toys'),
+(3, 20, 'LEGO Classic Bricks and Animals Kit', true, 'LEGO Set', 1800.00, 1.2, 'toys'),
+(4, 12, 'Barbie Doll with Accessories and Outfits', true, 'Barbie Doll', 950.00, 0.4, 'toys'),
+(5, 8, 'Hot Wheels Track Builder Kit - 5 Cars Included', true, 'Hot Wheels Set', 2200.00, 1.5, 'toys'),
+(6, 18, 'Nerf Elite 2.0 Commander Toy Blaster with 12 Darts', true, 'Nerf Gun', 1100.00, 0.7, 'toys'),
+(7, 25, 'Remote Control Helicopter with Gyro Stabilizer', true, 'RC Helicopter', 2700.00, 0.6, 'toys'),
+(8, 30, 'Rubik’s Cube 3x3 Original Puzzle', true, 'Rubik\'s Cube', 250.00, 0.2, 'toys'),
+(9, 10, 'Walkie Talkie for Kids - 2-Way Radio Set', true, 'Walkie Talkie', 750.00, 0.3, 'toys'),
+(10, 14, 'Superhero Action Figure Set - Pack of 4', true, 'Action Figures', 1300.00, 0.9, 'toys'),
+(11, 22, 'Stuffed Teddy Bear 2.5ft - Soft Plush', true, 'Teddy Bear', 850.00, 1.1, 'toys'),
+(12, 9, 'Magnetic Building Blocks Set - 64 pcs', true, 'Magnetic Blocks', 1700.00, 1.0, 'toys'),
+(13, 7, 'RC Monster Truck - Big Wheels, Off-Road', true, 'Monster Truck', 2100.00, 1.4, 'toys'),
+(14, 16, 'Drone with Gesture Control and LEDs', true, 'Mini Drone', 2900.00, 0.6, 'toys'),
+(15, 20, 'Kids Electric Keyboard Piano with Microphone', true, 'Toy Keyboard', 2400.00, 1.3, 'toys'),
+(16, 13, 'Coloring Book + Crayons Gift Pack', true, 'Coloring Set', 300.00, 0.5, 'toys'),
+(17, 17, 'UNO Playing Card Game for Family & Kids', true, 'UNO Cards', 150.00, 0.2, 'toys'),
+(18, 6, 'Puzzle Board Game - 1000 Pieces', true, 'Puzzle Game', 500.00, 0.9, 'toys'),
+(19, 19, 'Doctor Play Set with Tools and Case', true, 'Doctor Kit', 680.00, 0.7, 'toys'),
+(20, 11, 'Kitchen Set Toy for Kids - 20 Pieces', true, 'Kitchen Set', 900.00, 1.2, 'toys');
+
+INSERT INTO user_details (email, first_name, last_name, password, phno, role) VALUES
+('admin@fitstore.com', 'Ravi', 'Kumar', 'adminfit123', '9100000010', 'admin'),
+('client1@fitstore.com', 'Anil', 'Mehta', 'pass1234', '9100000011', 'customer'),
+('client2@fitstore.com', 'Sneha', 'Reddy', 'sneha@456', '9100000012', 'customer'),
+('client3@fitstore.com', 'Kiran', 'Sharma', 'kiran789', '9100000013', 'customer'),
+('client4@fitstore.com', 'Deepak', 'Verma', 'deepak321', '9100000014', 'customer'),
+('client5@fitstore.com', 'Neha', 'Patel', 'nehaPwd987', '9100000015', 'customer'),
+('client6@fitstore.com', 'Vikram', 'Joshi', 'vikram!456', '9100000016', 'customer'),
+('client7@fitstore.com', 'Pooja', 'Nair', 'pooja999', '9100000017', 'customer'),
+('client8@fitstore.com', 'Arjun', 'Desai', 'arjun#123', '9100000018', 'customer'),
+('client9@fitstore.com', 'Meera', 'Chopra', 'meera654', '9100000019', 'customer');
+
+INSERT INTO order_details (ordered_on, user_id)
+VALUES ('2024-09-09 14:30:00', 6);
+
+SELECT LAST_INSERT_ID();
+
+INSERT INTO ordered_items (quantity, item_id, order_id)
+VALUES 
+    (1, 3, 7),   -- RC Helicopter
+    (2, 7, 7),   -- Plush Teddy Bear
+    (1, 15, 7);  -- Remote Control Boat
+
+SELECT * FROM item_details WHERE item_id IN (3, 7, 15);
+
+START TRANSACTION;
+
+INSERT INTO order_details (ordered_on, user_id)
+VALUES ('2024-09-09 14:30:00', 6);
+
+SET @orderId = LAST_INSERT_ID();
+
+INSERT INTO ordered_items (quantity, item_id, order_id)
+VALUES 
+    (1, 3, @orderId),
+    (2, 7, @orderId),
+    (1, 15, @orderId);
+
+COMMIT;
+rollback;
+
+
+SELECT * FROM order_details WHERE order_id = 5;
+    
+SELECT 
+    u.first_name, 
+    id.item_name, 
+    oi.quantity, 
+    od.ordered_on
+FROM 
+    order_details od
+JOIN 
+    ordered_items oi ON od.order_id = oi.order_id
+JOIN 
+    item_details id ON id.item_id = oi.item_id
+JOIN 
+    user_details u ON u.user_id = od.user_id
+WHERE 
+    u.user_id = 6;
+
+SELECT user_id FROM user_details;
+INSERT INTO address_details(area, city, door_no, pincode, state, user_id) VALUES
+('Dwaraka Nagar', 'Vizag', '1-4-5', 530016, 'Andhra Pradesh', 3),
+('Pendurthi', 'Vizag', '2-9-11', 530051, 'Andhra Pradesh', 4),
+('Srinagar', 'Vizag', '3-7-8', 530018, 'Andhra Pradesh', 4),
+('Gajuwaka', 'Vizag', '4-6-10', 530026, 'Andhra Pradesh', 5),
+('Simhachalam', 'Vizag', '5-3-12', 530028, 'Andhra Pradesh', 5),
+('Akkayyapalem', 'Vizag', '6-1-9', 530016, 'Andhra Pradesh', 6),
+('Jagadamba', 'Vizag', '7-5-6', 530020, 'Andhra Pradesh', 6),
+('Sithammadhara', 'Vizag', '8-2-7', 530013, 'Andhra Pradesh', 7),
+('BHPV Township', 'Vizag', '9-6-3', 530012, 'Andhra Pradesh', 7),
+('Zilla Parishad', 'Vizag', '10-4-1', 530002, 'Andhra Pradesh', 8),
+('Allipuram', 'Vizag', '11-8-5', 530004, 'Andhra Pradesh', 8),
+('Scindia', 'Vizag', '12-2-9', 530014, 'Andhra Pradesh', 9),
+('Steel Plant Township', 'Vizag', '13-7-10', 530032, 'Andhra Pradesh', 9),
+('Siripuram', 'Vizag', '14-9-11', 530003, 'Andhra Pradesh', 10),
+('CBM Compound', 'Vizag', '15-6-13', 530003, 'Andhra Pradesh', 10);
+
+insert into item_url(url,item_id) values('data:image/jpeg;base64,/m.media-amazon.com/images/I/51Cyfc1u8lL._SL500_.jpg',1);
+insert into item_url(url,item_id) values('https://m.media-amazon.com/images/I/7167U0RBeKL._AC_SL1500_.jpg',2);
+insert into item_url(url,item_id) values('https://shoutnerd.com/wp-content/uploads/2025/01/LEGO-Classic-Bricks-and-Animals-Set.jpg',3);
+insert into item_url(url,item_id) values('https://images-na.ssl-images-amazon.com/images/I/81x4ZbLCYqL._AC_SL1500_.jpg',4);
+insert into item_url(url,item_id) values('http://media.mattel.com/root/Images/MainImage/chx36_hot_wheels_track_builder_-_spiral_stack-up_starter_set_xxx_9.jpg',5);
+insert into item_url(url,item_id) values('https://cdn.pixelbin.io/v2/black-bread-289bfa/HrdP6X/original/hamleys-product/493664261/665/493664261-3_7733.webp',6);
+insert into item_url(url,item_id) values('https://m.media-amazon.com/images/I/51hTrbq48aL._SL500_.jpg',7);
+insert into item_url(url,item_id) values('https://i5.walmartimages.ca/images/Large/869/777/6000196869777.jpg',8);
+insert into item_url(url,item_id) values('https://tse1.mm.bing.net/th/id/OIP.i881ee_mxdYGDllaQhLHegHaH7?pid=Api&P=0&h=180',9);
+insert into item_url(url,item_id) values('https://i.pinimg.com/736x/1b/f6/b4/1bf6b4ff2da7e20a440f99948b9f3135.jpg',10);
+insert into item_url(url,item_id) values('https://morismos.com/cdn/shop/files/Tezituor-5ft-Teddy-Bear-Stuffed-Animal-Big-Bear-with-I-Love-You-Heart-Plush-Toy_b4fef48b-7bb7-409b-81dd-a8569ce2b145.4581a5ee8b7269e3df80b469f4458577.jpg?v=1728977525',11);
+insert into item_url(url,item_id) values('https://m.media-amazon.com/images/I/71vMSRcdJ2L._AC_SL1500_.jpg',12);
+insert into item_url(url,item_id) values('https://i5.walmartimages.com/asr/9b47d4bf-97af-43ee-94c8-b4f2142b57d8_1.07f0d2c463ce286273318123a7eed850.jpeg',13);
+insert into item_url(url,item_id) values('https://i5.walmartimages.com/seo/JunYeShi-Clearance-Under-15-00-Foldable-1080P-FPV-Drone-Gesture-Control-Quadcopter-with-Obstacle-Avoidance-for-Beginners_9e78cc9f-79a6-43df-a48b-29deb86a4ad7.6cae5d6514a097bb93667aed8ca801cd.jpeg',14);
+insert into item_url(url,item_id) values('https://m.media-amazon.com/images/I/71BkbXMro8L._AC_SL1500_.jpg',15);
+insert into item_url(url,item_id) values('https://m.media-amazon.com/images/I/51engwnf0QL._SL500_.jpg',16);
+insert into item_url(url,item_id) values('https://www.picclickimg.com/DfMAAOSwrc9nPIl6/UNO-Playing-Card-Game-Family-Children-Friends-Party.webp',17);
+insert into item_url(url,item_id) values('https://tse3.mm.bing.net/th/id/OIP.ci1cC7Uyi7yryLixwZRUHQHaFU?pid=Api&P=0&h=180',18);
+insert into item_url(url,item_id) values('https://i5.walmartimages.com/asr/4f143e71-ee50-4bb3-af62-ccec79ee2bf9.2d158e7ad7f4a6b2a7f884ad922763f9.jpeg',20);
+
+select * from item_url;
+update item_url set url='https://m.media-amazon.com/images/I/51Cyfc1u8lL._SL500_.jpg' where item_id=1;
